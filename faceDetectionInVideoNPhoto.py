@@ -19,21 +19,18 @@ while True:
 
     # Loop over each detected face
     # putting a limit to avoid endless loop
-    if len(faces) < 20:
-        for (x, y, w, h) in faces:
-            # Draw a rectangle around the face
-            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+    for (x, y, w, h) in faces:
+        # Draw a rectangle around the face
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
-            # Generate a unique filename for the cropped face image
-            file_name = f'face_{str(uuid.uuid4())}.jpg'
+        # Generate a unique filename for the cropped face image
+        file_name = f'face_{str(uuid.uuid4())}.jpg'
 
-            # Crop the face from the frame
-            face_crop = frame[y:y+h, x:x+w]
+        # Crop the face from the frame
+        face_crop = frame[y:y+h, x:x+w]
 
-            # Save the cropped face image to disk
-            cv2.imwrite("Video_detectedFaces/"+file_name, face_crop)
-    else:
-        print("No faces detected")
+        # Save the cropped face image to disk
+        cv2.imwrite("Video_detectedFaces/"+file_name, face_crop)
 
     # Display the resulting frame
     cv2.imshow('Video', frame)
